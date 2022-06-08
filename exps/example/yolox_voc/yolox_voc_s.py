@@ -23,6 +23,7 @@ class Exp(MyExp):
         self.flip_prob = 0.5
 
         self.exp_name = os.path.split(os.path.realpath(__file__))[1].split(".")[0]
+        self.save_history_ckpt = False
 
     def get_data_loader(self, batch_size, is_distributed, no_aug=False, cache_img=False):
         from yolox.data import (

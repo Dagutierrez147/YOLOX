@@ -204,12 +204,12 @@ def main(exp, args, num_gpu):
     mAR = np.mean([value for value in list(AR.values()) if not (math.isnan(value))])
 
     metrics = ""
-    metrics +=f'Average Precision per class: {AP};\n'
-    metrics +=f'Mean Average Precision: {mAP};\n'
-    metrics +=f'Nan elements in AP: {nanAP};\n'
-    metrics +=f'Average Recall per class: {AP};\n'
-    metrics +=f'Average Recall: {mAR};\n'
-    metrics +=f'Nan elements in AR: {nanAR};\n'
+    metrics +=f'Average Precision per class: {AP}; '
+    metrics +=f'Mean Average Precision: {mAP}; '
+    metrics +=f'Nan elements in AP: {nanAP}; '
+    metrics +=f'Average Recall per class: {AP}; '
+    metrics +=f'Mean Average Recall: {mAR}; '
+    metrics +=f'Nan elements in AR: {nanAR}; '
 
     logger.info(metrics)
 

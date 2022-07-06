@@ -7,7 +7,8 @@ import os
 import random
 import warnings
 from loguru import logger
-
+import numpy as np
+import math
 import torch
 import torch.backends.cudnn as cudnn
 from torch.nn.parallel import DistributedDataParallel as DDP
@@ -193,6 +194,22 @@ def main(exp, args, num_gpu):
     *_, summary = evaluator.evaluate(
         model, is_distributed, args.fp16, trt_file, decoder, exp.test_size
     )
+
+    AP = _[0]
+    AR = _[1]
+
+    nanAP = len([value for value in list(AP.values()) if (math.isnan(value))])
+    nanAR = len([value for value in list(AR.values()) if (math.isnan(value))])
+    mAP = np.mean([value for value in list(AP.values()) if not (math.isnan(value))])
+    mAR = np.mean([value for value in list(AR.values()) if not (math.isnan(value))])
+    
+    logger.info(f'Average Precision per class: {AP};')
+    logger.info(f'Mean Average Precision: {mAP};')
+    logger.info(f'Nan elements in AP: {nanAP};')
+    logger.info(f'Average Recall per class: {AP};')
+    logger.info(f'AR: {mAR};')
+    logger.info(f'Nan elements in AR: {nanAR};')
+    
     logger.info("\n" + summary)
 
 

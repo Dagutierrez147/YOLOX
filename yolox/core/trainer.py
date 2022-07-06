@@ -193,7 +193,7 @@ class Trainer:
 
     def after_train(self):
         logger.info(
-            "Training of experiment is done and the best AP is {:.2f}".format(self.best_ap * 100)
+            "Training of experiment is done and the best AP is {:.2f};".format(self.best_ap * 100)
         )
         if self.rank == 0:
             if self.args.logger == "wandb":

@@ -202,15 +202,19 @@ def main(exp, args, num_gpu):
     nanAR = len([value for value in list(AR.values()) if (math.isnan(value))])
     mAP = np.mean([value for value in list(AP.values()) if not (math.isnan(value))])
     mAR = np.mean([value for value in list(AR.values()) if not (math.isnan(value))])
-    
-    logger.info(f'Average Precision per class: {AP};')
-    logger.info(f'Mean Average Precision: {mAP};')
-    logger.info(f'Nan elements in AP: {nanAP};')
-    logger.info(f'Average Recall per class: {AP};')
-    logger.info(f'AR: {mAR};')
-    logger.info(f'Nan elements in AR: {nanAR};')
-    
-    logger.info("\n" + summary)
+
+    metrics = ""
+    metrics +=f'Average Precision per class: {AP};\n'
+    metrics +=f'Mean Average Precision: {mAP};\n'
+    metrics +=f'Nan elements in AP: {nanAP};\n'
+    metrics +=f'Average Recall per class: {AP};\n'
+    metrics +=f'Average Recall: {mAR};\n'
+    metrics +=f'Nan elements in AR: {nanAR};\n'
+
+    logger.info(metrics)
+
+    with open(f'{file_name}/eval_metrics.txt', 'w') as file:
+        file.write(metrics)
 
 
 if __name__ == "__main__":

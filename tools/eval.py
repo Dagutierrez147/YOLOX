@@ -191,7 +191,7 @@ def main(exp, args, num_gpu):
         decoder = None
 
     # start evaluate
-    *_, summary = evaluator.evaluate(
+    *_, summary = evaluator.evaluate_with_metrics(
         model, is_distributed, args.fp16, trt_file, decoder, exp.test_size
     )
 
